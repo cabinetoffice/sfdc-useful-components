@@ -1,0 +1,2 @@
+<apex:page standardController="Account" recordSetVar="rset" extensions="ActionFollowRecordsController" action="{!follow}">
+</apex:page>

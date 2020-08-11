@@ -1,0 +1,29 @@
+<aura:component implements="flexipage:availableForAllPageTypes" controller="FollowingController">
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+    <aura:attribute name="followedContacts" type="List" />
+    
+    <lightning:card title="{!'Followed Contacts (' + v.followedContacts.length + ')'}">
+    	<div class="slds-card__body_inner">
+            <aura:if isTrue="{!equals(v.followedContacts.length, 0)}">
+            	You haven't following any contacts. 
+            </aura:if>
+            
+            <aura:iteration items="{!v.followedContacts}" var="a">
+                <lightning:tile label="{!a.FirstName + ' ' + a.LastName}" href="{!'/' + a.Id}">
+                    <aura:set attribute="media">
+                        <lightning:icon iconName="standard:contact" />
+                    </aura:set>
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Organisation">Organisation:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate" title="{!a.Account.Name}"><a href="{!'/' + a.Account.Id}">{!a.Account.Name}</a></p>
+                        </dd>
+                    </dl>
+                </lightning:tile>
+            </aura:iteration>
+        </div>
+    </lightning:card>
+</aura:component>
