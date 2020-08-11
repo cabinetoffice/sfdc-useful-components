@@ -1,0 +1,9 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes" controller="KnowledgeArticleController">
+    <aura:attribute name="recordId" type="string" />
+    <aura:attribute name="content" type="string" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler event="force:refreshView" action="{!c.init}" />
+
+    <aura:unescapedHtml value="{!v.content}" />
+</aura:component>

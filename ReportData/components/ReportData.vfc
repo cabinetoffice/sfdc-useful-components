@@ -1,0 +1,19 @@
+<apex:component controller="ReportData">
+    <apex:attribute name="DeveloperName" required="true" type="string" description="The DeveloperName of the report" />
+    <apex:attribute name="filterColumn" required="true" type="string" description="The filter column (ie. the f in f=v)" />
+    <apex:attribute name="filterValue" required="true" type="string" description="The filter value (ie. v in f=v)" />
+    <table class="report-data">
+        <tr>
+            <apex:repeat value="{!Columns}" var="h">
+                <th>{!h}</th>
+            </apex:repeat>
+        </tr>
+        <apex:repeat value="{!Rows}" var="r">
+            <tr>
+                <apex:repeat value="{!r}" var="c">
+                    <td>{!c}</td>
+                </apex:repeat>
+            </tr>
+        </apex:repeat>
+    </table>
+</apex:component>

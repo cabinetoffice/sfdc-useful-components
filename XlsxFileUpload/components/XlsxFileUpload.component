@@ -1,0 +1,34 @@
+<apex:component >
+    <apex:attribute name="id" type="string" description="The DOM ID that the element should use" />
+    <apex:attribute name="name_id" type="string" description="The destination apex:inputHidden." />
+    <apex:attribute name="data_id" type="string" description="The destination apex:inputHidden." />
+        
+    <script src="{!URLFOR($Resource.sheetsjs)}">
+    </script>
+    
+    <script>
+    function handleXLSX(ele, evt)
+    {
+        let output = document.getElementById(ele.dataset.dest);
+        let file = ele.files[0];
+        
+        let rdr = new FileReader();
+        rdr.onload = function (e) {
+            
+        	document.getElementById(ele.dataset.name).value = file.name;
+            
+            let data = XLSX.read(e.target.result, {type: 'binary'});
+            output.value = XLSX.utils.sheet_to_csv(data.Sheets[data.SheetNames[0]]);
+        }
+        rdr.readAsBinaryString(file);
+    }
+    </script>
+    
+    <div class="govuk-form-group">
+        <label class="govuk-label" for="{!id}">
+            Upload a file
+        </label>
+        <input id="{!id}" class="govuk-file-upload" data-name="{!name_id}" data-dest="{!data_id}" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" onchange="handleXLSX(this, event)" />
+    </div>
+    
+</apex:component>
